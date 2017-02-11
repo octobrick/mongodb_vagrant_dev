@@ -1,4 +1,4 @@
-# local_mongodb_vagrant_dev
+# mongodb_vagrant_dev
 Provision simple vagrant environment with MongoDB installed
 
 This simple vagrant box provides a quick sandbox setup for MongoDB project on local machine. This project was implemented on OSX El-Capitan as of Early 2017.
