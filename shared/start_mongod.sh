@@ -21,6 +21,7 @@ if [ "`ls /data`" == "db" ]
 then
     echo "/data/db directory already created, all good"
 else
+    echo "/data/db/ directory not found, creating directory..."
     sudo mkdir -p /data/db
     sudo chown -R vagrant:vagrant /data
 fi
