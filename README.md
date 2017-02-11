@@ -10,8 +10,8 @@ This simple vagrant box provides a quick sandbox setup for MongoDB project on lo
 ## Usage
 Copy the git branch to local directory
 ```
-    $ git clone git@github.com:octobrick/local_mongodb_vagrant_dev.git
-    $ cd local_mongodb_vagrant_dev.git
+    $ git clone git@github.com:octobrick/mongodb_vagrant_dev.git
+    $ cd mongodb_vagrant_dev.git
 ```
 Start the vagrant box
 ```
