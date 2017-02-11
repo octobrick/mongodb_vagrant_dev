@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -e
+set -x
+
+function config_hosts(){
+  echo "Configuring /etc/hosts ..."
+  echo "192.168.100.100 mongodb.local database"   >> /etc/hosts
+}
+
+function update_repo(){
+  echo "Install MongoDB Community"
+  echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+  echo "Update Repositoryies"
+  apt-get update -y
+}
+
+function install_mongod(){
+  echo "Install MongoDB Community"
+  apt-get install -y mongodb-org
+  sh -c "killall mongod; true"
+  echo "Set LC_ALL=C to .profile"
+  echo "export LC_ALL=C" >> /home/vagrant/.profile
+}
+
+# advice from mongoDB doc => https://docs.mongodb.com/manual/tutorial/transparent-huge-pages/
+# for the following THP setting
+function config(){
+  # disable THP
+  echo -e "never" > /sys/kernel/mm/transparent_hugepage/enabled
+  echo -e "never" > /sys/kernel/mm/transparent_hugepage/defrag
+  # disable mongod upstart service
+  echo 'manual' | tee /etc/init/mongod.override
+}
+
+config_hosts
+update_repo
+install_mongod
+config
+echo "DONE"
