@@ -6,6 +6,7 @@ This simple vagrant box provides a quick sandbox setup for MongoDB project on lo
 # Prerequisite:
   - Vagrant 1.7.2 or later
   - VirtualBox 4.3.40 or later
+  - OSX 10.11 or later
   
 ## Usage
 Step 1: Copy the git branch to local directory
@@ -68,3 +69,14 @@ or to specify the host:port pair,
     
 ``` 
 Congratulation! You have set up a MongoDB database instance running in a Vagrant sandbox environment. Now you can interact your App with port 27017 to store and read data.
+
+*(Optional)* Step 7: Run script below to generate some test user data from Vagrant environment
+```
+   vagrant$ cd ~/shared
+   vagrant$ mongo localhost:27017/test load_test_data.js
+```
+Then, after data import, run the command below to confirm 100,000 test user documents were inserted.
+```
+    vagrant$ mongo localhost:27017/test --eval "db.users.count()"
+    100000
+```
